@@ -5,7 +5,7 @@ static long num_steps = 100000;
 #define NUM_THREADS 2
 int main()
 {
-  int i;
+  int i, num_threads;
   double pi, step;
   double sum[2];
   step = 1.0/(double) num_steps;
@@ -16,15 +16,17 @@ int main()
     double x = 0.0;
     id = omp_get_thread_num();
     nthrds = omp_get_num_threads();
+    if (id==0) num_threads = nthrds;
     for (i=id, sum[id]=0.0; i<num_steps; i=i+nthrds)
     {
       x = (i+0.5)*step;
       sum[id] += 4.0/(1.0+x*x);
     }
   }
-  for(i=0, pi=0.0; i<NUM_THREADS;i++)
+  for(i=0, pi=0.0; i<num_threads;i++)
   {
     pi += sum[i] * step;
   }
   printf("pi = %e\n",pi);
+  return 0;
 }
