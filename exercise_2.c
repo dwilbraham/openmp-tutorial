@@ -1,13 +1,13 @@
 #include <omp.h>
 #include <stdio.h>
 
-static long num_steps = 100000;
+static long num_steps = 1000000;
 #define NUM_THREADS 2
 int main()
 {
   int i, num_threads;
   double pi, step;
-  double sum[2];
+  double sum[NUM_THREADS];
   step = 1.0/(double) num_steps;
   omp_set_num_threads(NUM_THREADS);
   #pragma omp parallel
