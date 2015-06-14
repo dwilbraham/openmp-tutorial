@@ -1,7 +1,7 @@
 #include <omp.h>
 #include <stdio.h>
 
-static long num_steps = 1000000;
+static long num_steps = 10000000;
 #define NUM_THREADS 2
 int main()
 {
